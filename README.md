@@ -1,7 +1,7 @@
 # Ex. No:1b 			Study of Client Server Chat Applications
 
 ## Aim: 
-To perform a study on Client Server Chat Applications
+To implement Chat Application using Client Server Model.
 ## Introduction:
 Client-server chat applications are a category of networked software that enables real-time communication between users over a network. This study explores the key components, architecture, and considerations in the development of client-server chat applications, highlighting their significance and common implementation practices.
 Client-server chat applications are software systems that enable real-time communication between users over a network. These applications follow a client-server model, where one component (the server) manages connections and facilitates communication, while the other component (the client) interacts with the server to send and receive messages. Below are the fundamental aspects and components involved in the basics of client-server chat applications:
@@ -72,6 +72,51 @@ User authentication mechanisms are essential to ensure secure and authorized acc
 Client-server chat applications are versatile tools that facilitate real-time communication between users over a network. They incorporate various components, including server-side and client-side elements, and must consider factors such as security, scalability, and concurrency. As technology continues to advance, client-server chat applications remain integral for collaborative communication in various domains.
 
 Client-server chat applications are foundational to real-time communication over networks. They incorporate principles of socket programming, communication protocols, and security mechanisms to provide a seamless user experience. Understanding the basics of client-server chat applications is essential for developers involved in networked application development, as they form the backbone of various collaborative communication systems. As technology evolves, chat applications continue to adapt, incorporating new features and technologies to enhance user interaction and connectivity.
+
+## Client.py
+```
+import socket
+
+s = socket.socket()
+host = "127.0.0.1"
+port = 8080
+
+s.connect((host, port))
+print("Connected to the call")
+
+while True:
+    message = input(">> ")
+    s.send(message.encode())
+    data = s.recv(1024).decode()
+    print("Ben: ", data)
+```
+## Server.py
+```
+import socket
+
+s = socket.socket()
+host = "127.0.0.1"
+port = 8080
+
+s.bind((host, port))
+s.listen(1)
+
+print("Ringing...")
+conn, addr = s.accept()
+print(addr, "connected")
+
+while True:
+    data = conn.recv(1024).decode()
+    print("Gwen: ", data)
+    message = input(">> ")
+    conn.send(message.encode())
+```
+
+## Client Output
+<img width="684" height="212" alt="image" src="https://github.com/user-attachments/assets/5fda740e-9c43-47e4-8db9-e398ef351586" />
+
+## Server Output
+<img width="727" height="238" alt="image" src="https://github.com/user-attachments/assets/b974b6cd-3715-42fe-a88a-43d88d241f9a" />
 
 
 ## Result:
